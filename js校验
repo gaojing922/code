@@ -1,0 +1,28 @@
+// 校验
+check (value, nullMsg, RegexInfo, errorMsg) {
+      let flag = true
+      if (!value.trim()) {
+        NoticeTips({
+          content: nullMsg
+        })
+        flag = false
+      } else {
+        let unameRegex = RegexInfo
+        if (RegexInfo) {
+          if (!unameRegex.test(value)) {
+            NoticeTips({
+              content: errorMsg
+            })
+            flag = false
+          }
+        }
+      }
+      return flag
+    },
+用法:
+validateForm () {
+  let flagOut = this.check(this.formValidate.j_username, '用户名不能为空!', /^.{6,}$/, '账号长度不小于6位')
+  flagOut = flagOut && this.check(this.formValidate.j_password, '请输入密码!')
+  flagOut = flagOut && this.check(this.formValidate.validateCode, '请输入验证码!')
+  return flagOut
+},
